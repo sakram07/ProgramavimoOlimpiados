@@ -1,4 +1,5 @@
 import sys
+
 try:
     try:
         NUO, IKI = [int(x) for x in open(sys.argv[1]).read()]
@@ -7,6 +8,7 @@ try:
         sys.exit()
 except IndexError:
     NUO, IKI = [int(x) for x in input().split()]
+    
 didz = 0
 didzsk = NUO
 for x in range(NUO, IKI+1):
@@ -19,6 +21,7 @@ for x in range(NUO, IKI+1):
     if dal > didz:
         didz = dal
         x = didzsk
+        
 try:
     open(sys.argv[1], 'w').write(didzsk)
 except IndexError:
