@@ -2,33 +2,41 @@
 
 using namespace std;
 
-int cycletime(int n, int t, int arr[][2]) {
-    int result = 0;
-    int totaltime = 0;
+void sortboth(int stipris[], int numeris[], int n) {
+       int i, key, j, numerkey;
+       for (i = 1; i < n; i++) {
+           key = stipris[i];
+           numerkey = numeris[i];
+           j = i - 1;
 
-    while (totaltime < t) {
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < arr[i][0]; j++) {
-                result += arr[i][1];
-                totaltime++;
-                if (totaltime >= t) {
-                    break;
-                }
-            }
-        }
-    }
-    return result;
+           while (j >= 0 && stipris[j] > key) {
+               stipris[j + 1] = stipris[j];
+               numeris[j + 1] = numeris[j];
+               j = j - 1;
+           }
+
+           stipris[j + 1] = key;
+           numeris[j + 1] = numerkey;
+       }
 }
 
 int main() {
-    int n, t;
-    cin >> n >> t;
+    int n, k;
+    cin >> n >> k;
 
-    int arr[n][2];
+    int stipris[n];
+    int numeris[n];
+
     for (int i = 0; i < n; i++) {
-        cin >> arr[i][0] >> arr[i][1];
+        cin >> stipris[i];
+        numeris[i] = i;
     }
 
-    int answer = cycletime(n, t, arr);
-    cout << answer;
+    sortboth(stipris, numeris, n);
+
+    for (int i = n - 1; i >= n - k; i--) {
+        cout << numeris[i] + 1 << endl;
+    }
+
+
 }
